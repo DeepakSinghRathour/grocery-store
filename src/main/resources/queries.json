@@ -1,0 +1,4 @@
+{
+    "updateQuantity": "UPDATE Store s SET s.quantity = :quantity WHERE s.ItemName = :itemName",
+    "updatePrice": "UPDATE Store s SET s.price = :price WHERE s.ItemName = :itemName"
+}
