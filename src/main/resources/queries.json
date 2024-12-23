@@ -1,4 +1,8 @@
 {
+	"checkItemNameIsPresent" : "SELECT COUNT(s) FROM Store s WHERE s.ItemName = :itemName",
     "updateQuantity": "UPDATE Store s SET s.quantity = :quantity WHERE s.ItemName = :itemName",
-    "updatePrice": "UPDATE Store s SET s.price = :price WHERE s.ItemName = :itemName"
+    "updatePrice": "UPDATE Store s SET s.price = :price WHERE s.ItemName = :itemName",
+	"getPrice" : "SELECT s.price FROM Store s WHERE s.ItemName = :itemName",
+	"getQuantity" : "SELECT s.quantity FROM Store s WHERE s.ItemName = :itemName",
+	"updateQuantityAfterShopping": "UPDATE Store s SET s.quantity = :quantity WHERE s.ItemName = :itemName"
 }

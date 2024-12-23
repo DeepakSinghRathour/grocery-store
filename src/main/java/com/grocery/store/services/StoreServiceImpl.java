@@ -35,13 +35,18 @@ public class StoreServiceImpl implements StoreService{
 	}
 
 	@Override
-	public int updateQuantity(int quantity, String itemName) {
+	public String updateQuantity(int quantity, String itemName) {
 		return queryService.updateQuantity(quantity, itemName);
 	}
 
 	@Override
-	public int updatePrice(int price, String itemName) {
+	public String updatePrice(int price, String itemName) {
 		return queryService.updatePrice(price, itemName);
+	}
+
+	@Override
+	public String totalPayableAmount(String itemName, int quantity) {
+		return queryService.totalPayableAmount(itemName, quantity);
 	}
 
 }

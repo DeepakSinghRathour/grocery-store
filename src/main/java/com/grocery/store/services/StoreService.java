@@ -7,18 +7,34 @@ import com.grocery.store.entities.Store;
 
 public interface StoreService {
 	
+	/*
+	 * Common Interfaces for both the members
+	 */
+	
+	
 	// get all item 
 	List<Store> getAllItem();
 	
 	// get all item by id
 	Optional<Store> getById(int n);
 	
+	/* 
+	 *Interface for Admin 
+	 */
+	
 	// add the items
 	Store addItems(Store store);
 	
 	// update quantity
-	int updateQuantity(int quantity, String itemName);
+	String updateQuantity(int quantity, String itemName);
 	
 	// change price
-	int updatePrice(int price, String itemName);
+	String updatePrice(int price, String itemName);
+	
+	/*
+	 * Interface for user
+	 */
+	
+	String totalPayableAmount(String itemName, int quantity);
+
 }
