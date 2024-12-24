@@ -11,8 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
-        java-version: '17'
-        distribution: 'temurin'
+      java-version: '17'
+      distribution: 'temurin'
 
     steps:
       # Step 1: Checkout code
