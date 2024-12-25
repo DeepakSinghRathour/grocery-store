@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the application JAR to the working directory
-COPY target/grocery-store.jar app.jar
+COPY target/admin-profile-0.0.1-SNAPSHOT.jar app.jar
 
 
 # Expose the application port
