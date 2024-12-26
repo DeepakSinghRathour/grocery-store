@@ -17,14 +17,15 @@ jobs:
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
           ACCEPT_EULA: 'Y'
-          SA_PASSWORD: 'root'
+          SA_PASSWORD: 'P@ssw0rd'
         ports:
           - 1433:1433
         options: >-
-          --health-cmd "timeout 1 bash -c '< /dev/tcp/localhost/1433' || exit 1"
-          --health-interval 10s 
-          --health-timeout 10s 
+          --health-cmd "sqlcmd -S localhost -U sa -P P@ssw0rd -Q 'SELECT 1'"
+          --health-interval 10s
+          --health-timeout 10s
           --health-retries 5
+
     
     steps:
       - name: Checkout code
