@@ -14,16 +14,18 @@ jobs:
     
     services:
       sqlserver:
-        image: mcr.microsoft.com/mssql/server:2019-CU30-ubuntu-20.04
+        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
           ACCEPT_EULA: 'Y'
-          SA_PASSWORD: 'P@ssw0rd'
+          SA_PASSWORD: 'ComplexP@ssw0rd123!'
         ports:
-          - 1433:1433
+          - 5433:1433
         options: >-
-          --health-cmd "sqlcmd -S localhost -U sa -P P@ssw0rd -Q 'SELECT 1'"
-          --health-interval 10s
-          --health-timeout 10s
+          --memory=2g 
+          --cpus=2 
+          --health-cmd "sqlcmd -S localhost,5433 -U sa -P ComplexP@ssw0rd123! -Q 'SELECT 1'"
+          --health-interval 10s 
+          --health-timeout 10s 
           --health-retries 5
 
     steps:
@@ -46,13 +48,18 @@ jobs:
       - name: Wait for SQL Server
         run: |
           for i in {1..60}; do
-            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "SELECT 1" && echo "SQL Server is ready!" && break
+            /opt/mssql-tools/bin/sqlcmd -S localhost,5433 -U sa -P ComplexP@ssw0rd123! -Q "SELECT 1" && echo "SQL Server is ready!" && break
             echo "Waiting for SQL Server to be ready..." && sleep 5
           done
 
+      - name: Fetch SQL Server Logs (if failure occurs)
+        if: failure()
+        run: |
+          docker logs $(docker ps -q --filter ancestor=mcr.microsoft.com/mssql/server:2019-latest)
+
       - name: Initialize SQL Server Database
         run: |
-          /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P P@ssw0rd -Q "CREATE DATABASE myStore"
+          /opt/mssql-tools/bin/sqlcmd -S localhost,5433 -U sa -P ComplexP@ssw0rd123! -Q "CREATE DATABASE myStore"
 
       - name: Run Tests
         run: mvn clean test
